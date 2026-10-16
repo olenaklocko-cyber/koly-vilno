@@ -1,0 +1,29 @@
+# Тиждень 3: фонова задача за розкладом (cron).
+# Щоночі о 22:00 за Києвом (19:00 UTC) — робить зведення для майстрів.
+# Це і є «завдання по розкладу»: ніхто не натискає кнопку, робот працює сам.
+name: Нічне зведення
+
+on:
+  schedule:
+    - cron: "0 19 * * *"
+  workflow_dispatch: # ручний запуск — зручно для демо
+
+jobs:
+  zvedennya:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Зробити зведення
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        run: |
+          curl -sS -X POST \
+            "$SUPABASE_URL/rest/v1/rpc/zrobyty_zvedennya" \
+            -H "apikey: $SUPABASE_KEY" \
+            -H "Authorization: Bearer $SUPABASE_KEY" \
+            -H "Content-Type: application/json" \
+            -d '{}' \
+            | tee result.txt
+          echo "Зроблено зведень: $(cat result.txt)"
