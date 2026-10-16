@@ -1,0 +1,82 @@
+:root {
+  --aktsent: #0d9488;
+  --aktsent-dark: #0f766e;
+  --chorne: #1c1917;
+  --siryi: #78716c;
+  --liniya: #e7e5e4;
+  --fon: #f8fafc;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--fon);
+  color: var(--chorne);
+}
+
+.konteyner {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.shapka {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--liniya);
+  margin-bottom: 16px;
+}
+
+.shapka h1 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.knopka {
+  display: inline-block;
+  background: var(--aktsent);
+  color: #fff;
+  border: 0;
+  border-radius: 10px;
+  padding: 12px 18px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.knopka:disabled { opacity: 0.6; }
+
+.kartka {
+  background: #fff;
+  border: 1px solid var(--liniya);
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+.slots {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+@media (min-width: 600px) {
+  .slots { grid-template-columns: repeat(3, 1fr); }
+}
+
+.slot {
+  border: 1px solid var(--liniya);
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  font-size: 14px;
+  background: #fff;
+}
+
+.pustyi { color: var(--siryi); font-size: 14px; }
+.pomylka { color: #b91c1c; font-size: 14px; }
