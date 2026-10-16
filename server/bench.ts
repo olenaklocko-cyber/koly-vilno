@@ -2,7 +2,7 @@
 // Запуск: npm run bench
 // Потрібні у server/.env: SUPABASE_URL, SUPABASE_KEY (anon або service)
 
-import { klientZSupabase, vilitniSlotyBezKeshu, vilitniSlotyZKeshem, ochystytyKeshSlotiv } from "./sloty";
+import { klientZSupabase, vilitniSlotyBezKeshu, vilitniSlotyZKeshem, ochystytyKeshSlotiv } from "./sloty.ts";
 
 const url = process.env.SUPABASE_URL ?? process.env.VITE_SUPABASE_URL;
 const key = process.env.SUPABASE_KEY ?? process.env.VITE_SUPABASE_KEY;

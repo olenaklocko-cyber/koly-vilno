@@ -3,7 +3,7 @@
 // і повільного розкладу). З кешем: відповідь пам'ятається кілька хвилин.
 
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
-import { Kesh } from "./kesh";
+import { Kesh } from "./kesh.ts";
 
 export type Slot = {
   id: number;

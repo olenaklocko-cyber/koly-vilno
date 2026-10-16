@@ -6,8 +6,11 @@ export type KeshZapis<T> = { znachennya: T; do: number };
 
 export class Kesh<T> {
   private sklad = new Map<string, KeshZapis<T>>();
+  private ttlMs: number;
 
-  constructor(private ttlMs: number) {}
+  constructor(ttlMs: number) {
+    this.ttlMs = ttlMs;
+  }
 
   otrymaty(klyuch: string): T | undefined {
     const zapys = this.sklad.get(klyuch);
