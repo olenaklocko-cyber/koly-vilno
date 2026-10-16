@@ -7,6 +7,7 @@ import { pryemyatyZminy, type PodiyiRealTime } from "./lib/realTime";
 import { zapysatyPodiyu } from "./lib/zhurnaly";
 import { stiykyyVyklyk } from "../server/stiykist";
 import PanelMonitorynhu from "./pages/PanelMonitorynhu";
+import PanelZdorovya from "./pages/PanelZdorovya";
 
 type Slot = { id: number; pochatok: string };
 
@@ -92,14 +93,20 @@ export default function App() {
   }, []);
 
   if (shlyah === "#/monitoring") return <PanelMonitorynhu />;
+  if (shlyah === "#/health") return <PanelZdorovya />;
 
   return (
     <div className="konteyner">
       <header className="shapka">
         <h1>🧳 Коли вільно</h1>
-        <a href="#/monitoring" style={{ fontSize: 13, color: "#0d9488" }}>
-          🔍 Моніторинг
-        </a>
+        <div style={{ display: "flex", gap: 12 }}>
+          <a href="#/health" style={{ fontSize: 13, color: "#0d9488" }}>
+            🩺 Здоров'я
+          </a>
+          <a href="#/monitoring" style={{ fontSize: 13, color: "#0d9488" }}>
+            🔍 Моніторинг
+          </a>
+        </div>
       </header>
 
       <section className="kartka">
