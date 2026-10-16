@@ -4,6 +4,11 @@
 Стек: React 19 + TypeScript + Vite · Supabase (Postgres + Realtime) · Node (бенчмарк) · mobile-first.
 
 Репозиторій: https://github.com/olenaklocko-cyber/koly-vilno
+Сторінка-презентація: https://olenaklocko-cyber.github.io/my-works/koly-vilno.html
+
+> ⚠️ **Після 8-го тижня** прибрати зі сторінки-презентації таблиці
+> «Тижні» і «Показати куратору» — це сторінка продукту для людей,
+> користувачі не мають бачити внутрішніх тижнів курсу.
 
 ---
 
