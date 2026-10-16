@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import supabase from "./lib/supabase";
 import { pryemyatyZminy, type PodiyiRealTime } from "./lib/realTime";
 import { zapysatyPodiyu } from "./lib/zhurnaly";
+import { stiykyyVyklyk } from "../server/stiykist";
 import PanelMonitorynhu from "./pages/PanelMonitorynhu";
 
 type Slot = { id: number; pochatok: string };
@@ -38,20 +39,28 @@ export default function App() {
     const pochatok = performance.now();
     (async () => {
       try {
-        const { data, error } = await supabase
-          .from("sloty")
-          .select("id, pochatok")
-          .eq("status", "vilnyi")
-          .order("pochatok", { ascending: true })
-          .limit(30);
-        if (error) throw new Error(error.message);
-        setSloty((data ?? []) as Slot[]);
+        // Тиждень 6: таймаут 4с + 1 повтор + запасний варіант (порожній список),
+        // якщо Supabase ліг — сторінка показує «запасні дані», а не білу мить.
+        const data = await stiykyyVyklyk(
+          async () => {
+            const { data, error } = await supabase
+              .from("sloty")
+              .select("id, pochatok")
+              .eq("status", "vilnyi")
+              .order("pochatok", { ascending: true })
+              .limit(30);
+            if (error) throw new Error(error.message);
+            return (data ?? []) as Slot[];
+          },
+          { zapasnyi: [] as Slot[], timeoutMs: 4000, skilkyPovtoriv: 1, pauzaMs: 300 },
+        );
+        setSloty(data);
         setZyavkaMS(Math.round(performance.now() - pochatok));
         setStan("готово");
         void zapysatyPodiyu({
           typ: "podiya",
           povitomlennya: "Відкрив сторінку «Вільні слоти»",
-          detal: `завантаження ${(performance.now() - pochatok).toFixed(0)} мс, слотів: ${(data ?? []).length}`,
+          detal: `завантаження ${(performance.now() - pochatok).toFixed(0)} мс, слотів: ${data.length}`,
         });
       } catch (e) {
         setPomylka((e as Error).message);
